@@ -1,19 +1,14 @@
-# 🧠 Handwritten Digit Recognition (Rust, From Scratch)
+# 🧠 Handwritten Digit Recognition (WASM Inference Engine)
+
+> [!IMPORTANT]
+> **This repository is a dedicated WebAssembly (WASM) frontend display.** It showcases a high-performance, real-time browser inference engine.
+> 
+> **For the core machine learning codebase**—including the custom dataset loader, manual backpropagation logic, loss function calculations, and the full training pipeline written from scratch in pure Rust—please visit the main repository: 
+> 👉 **[princeb777/handwritten-digits-recognition](https://github.com/princeb777/handwritten-digits-recognition)**
 
 A high-performance handwritten digit recognition system built entirely in **Rust**, implementing a neural network **from scratch without any ML libraries**.
 
-> ⚡ Focus: Systems Programming + Machine Learning + WebAssembly
-
----
-
-## 🚀 Features
-
-* 🧠 Neural network from scratch (no TensorFlow/PyTorch)
-* ⚙️ Manual forward propagation logic
-* 🌐 **WebAssembly Port:** Runs directly in your browser with zero latency!
-* 🎮 Interactive drawing canvas (Web + Raylib Desktop)
-* 💾 Pre-trained embedded model (`.mnistai`)
-* ⚡ Optimized Rust implementation
+> ⚡ Focus: High-Performance Systems Engineering | Bare-Metal Machine Learning | WebAssembly FFI
 
 ---
 
@@ -62,8 +57,8 @@ The neural network runs directly in your browser via WebAssembly, predicting dig
 
 ### 1️⃣ Clone & Navigate
 ```bash
-git clone https://github.com/princeb777/handwritten-digits-recognition.git
-cd handwritten-digits-recognition/web
+git clone https://github.com/princeb777/handwritten-digits-recognition-wasm.git
+cd handwritten-digits-recognition-wasm/web
 ```
 
 ### 2️⃣ Install Dependencies & Run
@@ -89,19 +84,18 @@ cargo run
 
 ---
 
-## 🎯 Why This Project Stands Out
+## 🎯 Why This Project Stands Out to Recruiters
 
-**Most ML projects:**
-* Use high-level frameworks
-* Hide implementation details
-* Rely on Python and heavy backends
+**Typical ML Portfolios:**
+* Rely heavily on high-level Python wrappers (TensorFlow/PyTorch)
+* Abstract away the underlying mathematics and memory management
+* Require heavy server-side backends for inference
 
-**This project:**
-* Builds everything from scratch in pure Rust
-* Compiles down to WebAssembly to run entirely client-side
-* Demonstrates deep ML understanding
-* Combines systems programming with AI
-* Shows strong low-level optimization skills
+**This Engineering Project:**
+* **Bare-Metal ML:** Builds a neural network completely from scratch in pure Rust, proving a deep mathematical understanding of linear algebra and forward propagation.
+* **Systems Architecture:** Demonstrates strong low-level memory management and static array optimization, resulting in zero-allocation inference loops.
+* **Full-Stack WebAssembly:** Cross-compiles the Rust engine to WebAssembly, binding it natively to a TypeScript frontend via zero-cost abstractions for instantaneous, client-side browser execution.
+* **No Black Boxes:** Owns the entire pipeline from pixel extraction to the final Softmax activation.
 
 ---
 
