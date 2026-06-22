@@ -6,6 +6,8 @@
 > **For the core machine learning codebase**—including the custom dataset loader, manual backpropagation logic, loss function calculations, and the full training pipeline written from scratch in pure Rust—please visit the main repository: 
 > 👉 **[princeb777/handwritten-digits-recognition](https://github.com/princeb777/handwritten-digits-recognition)**
 
+🚀 **[TRY THE LIVE DEMO HERE!](https://princeb777.github.io/handwritten-digits-recognition-wasm/)** 🚀
+
 A high-performance handwritten digit recognition system built entirely in **Rust**, implementing a neural network **from scratch without any ML libraries**.
 
 > ⚡ Focus: High-Performance Systems Engineering | Bare-Metal Machine Learning | WebAssembly FFI
