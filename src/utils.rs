@@ -1,5 +1,6 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
+#[cfg(not(target_arch = "wasm32"))]
 pub fn rand_gen() -> f32 {
     // Get current time in nanos as seed
     let nanos = SystemTime::now()
@@ -19,6 +20,14 @@ pub fn rand_gen() -> f32 {
     let uniform = (rand as f32) / (m as f32 / 2.0) - 1.0;
 
     // Scale to Xavier range [-0.085, 0.085]
+    uniform * 0.085
+}
+
+#[cfg(target_arch = "wasm32")]
+pub fn rand_gen() -> f32 {
+    let rand = js_sys::Math::random() as f32;
+    // Scale similarly
+    let uniform = (rand * 2.0) - 1.0;
     uniform * 0.085
 }
 

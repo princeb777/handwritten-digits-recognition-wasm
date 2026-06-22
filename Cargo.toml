@@ -3,6 +3,14 @@ name = "handwritten-digits-recognition"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "handwritten_digits_core"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
 [profile.release]
 opt-level = "z"   # Optimize for size
 lto = true        # Enable link-time optimization
@@ -15,6 +23,9 @@ rustflags = [
     "--clang-arg=-I/usr/x86_64-w64-mingw32/include",
 ]
 
-
-[dependencies]
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 raylib = "5.5.1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+js-sys = "0.3"

@@ -1,21 +1,18 @@
 # 🧠 Handwritten Digit Recognition (Rust, From Scratch)
 
-    
-
 A high-performance handwritten digit recognition system built entirely in **Rust**, implementing a neural network **from scratch without any ML libraries**.
 
-> ⚡ Focus: Systems Programming + Machine Learning + Performance
+> ⚡ Focus: Systems Programming + Machine Learning + WebAssembly
 
 ---
 
 ## 🚀 Features
 
 * 🧠 Neural network from scratch (no TensorFlow/PyTorch)
-* ⚙️ Manual forward propagation + backpropagation
-* 🎯 MNIST training + evaluation pipeline
-* 🎮 Interactive drawing canvas (Raylib)
-* 💾 Model save/load (`.mnistai`)
-* 📦 Embedded dataset support (`include_str!`)
+* ⚙️ Manual forward propagation logic
+* 🌐 **WebAssembly Port:** Runs directly in your browser with zero latency!
+* 🎮 Interactive drawing canvas (Web + Raylib Desktop)
+* 💾 Pre-trained embedded model (`.mnistai`)
 * ⚡ Optimized Rust implementation
 
 ---
@@ -23,27 +20,28 @@ A high-performance handwritten digit recognition system built entirely in **Rust
 ## 🏗️ Tech Stack
 
 * **Language:** Rust (Edition 2024)
-* **Graphics:** raylib
+* **Web Frontend:** WebAssembly (`wasm-bindgen`), Vite, TypeScript, HTML/CSS
+* **Desktop Graphics:** raylib
 * **Core Concepts:**
-
   * Feedforward Neural Networks
-  * Backpropagation
   * ReLU Activation
   * Softmax
-  * Gradient Descent
+  * Static array computations
 
 ---
 
 ## 📁 Project Structure
 
 ```
-src/
-├── main.rs        # CLI + runtime loop
-├── network.rs     # Neural network (forward + backprop)
-├── training.rs    # Training + evaluation
-├── dataset.rs     # MNIST CSV loader
-├── draw.rs        # Drawing canvas (Raylib)
-├── utils.rs       # Math utilities
+.
+├── pkg/           # Compiled WebAssembly module
+├── src/           # Rust Core (Desktop + WASM)
+│   ├── lib.rs     # WebAssembly bindings
+│   ├── main.rs    # Desktop CLI + raylib loop
+│   ├── network.rs # Neural network logic
+│   ├── draw.rs    # Desktop drawing canvas
+│   └── utils.rs   # Math utilities
+└── web/           # Web Frontend (Vite)
 ```
 
 ---
@@ -58,163 +56,52 @@ src/
 
 ---
 
-## ⚙️ How It Works
+## 🖥️ Running the Web App (Browser)
 
-```
-Image (28x28) → Flatten → Neural Network → Softmax → Prediction
-```
+The neural network runs directly in your browser via WebAssembly, predicting digits in real-time as you draw!
 
-* Normalize pixel values → `[0,1]`
-* Forward pass through network
-* Compute loss
-* Backpropagate gradients
-* Update weights
-
----
-
-## 🎥 Demo
-
-[![Watch the demo](https://img.youtube.com/vi/st_Bw2JLXkc/0.jpg)](https://youtu.be/st_Bw2JLXkc)
-
-> Click the image to watch the full demo on YouTube.
-
----
-
-## 🖥️ Running the Project
-
-### 1️⃣ Clone
-
+### 1️⃣ Clone & Navigate
 ```bash
 git clone https://github.com/princeb777/handwritten-digits-recognition.git
-cd handwritten-digits-recognition
+cd handwritten-digits-recognition/web
 ```
 
-### 2️⃣ Add Dataset
-
-Download MNIST CSV files and place them in:
-
-```
-data/
-├── train.csv
-├── test.csv
-```
-
-### 3️⃣ Build
-
+### 2️⃣ Install Dependencies & Run
+Make sure you have Node.js and `pnpm` installed.
 ```bash
-cargo build --release
+pnpm install
+pnpm dev
 ```
+Open your browser to `http://localhost:5173/`. Draw a digit and watch it predict instantly!
 
-### 4️⃣ Run
+---
+
+## 🖥️ Running the Desktop App
+
+You can also run the native desktop application powered by `raylib`.
 
 ```bash
 cargo run
 ```
-
----
-
-## 🎮 Usage
-
-On running:
-
-```
-0 : Use Default MNIST model  
-1 : Load saved model  
-2 : Train the MNIST model  
-```
-
-Then:
 
 * Draw digit using mouse
 * Release mouse → prediction appears in terminal
 
 ---
 
-## 💾 Model Persistence
-
-Models are saved as:
-
-```
-model_name.mnistai
-```
-
-Reload anytime without retraining.
-
----
-
-## ⚡ Performance Highlights
-
-* 🚀 No external ML frameworks
-* 🧮 Static array computations (fast & cache-friendly)
-* 🔧 Release optimizations:
-
-  * LTO enabled
-  * Binary stripping
-* ⚙️ Minimal runtime overhead
-
----
-
-## 📊 Example Output
-
-```
-Prediction = (7, 98.23%)
-```
-
----
-
 ## 🎯 Why This Project Stands Out
 
 **Most ML projects:**
-
 * Use high-level frameworks
 * Hide implementation details
+* Rely on Python and heavy backends
 
 **This project:**
-
-* Builds everything from scratch
+* Builds everything from scratch in pure Rust
+* Compiles down to WebAssembly to run entirely client-side
 * Demonstrates deep ML understanding
 * Combines systems programming with AI
 * Shows strong low-level optimization skills
-
----
-
-## 📈 Training Results
-
-After **5 epochs**, the model achieves **~94.76% accuracy** on the MNIST test set.
-
-```
-0 : Use Default MNIST model
-1 : Load the MNIST model
-2 : Train the MNIST model
-2
-Training the model... you might want to grab a cup of coffee while it runs.
-Loading Training Data (embedded)
-Loaded 60000 samples
-Loading Testing Data (embedded)
-Loaded 10000 samples
-acc 0.9088
-acc 0.9259
-acc 0.9343
-acc 0.9422
-acc 0.9476
-Enter the file name to save the model
-Press Enter to skip
-```
-
----
-
-## 🔮 Future Improvements
-
-* [ ] Multiple hidden layers
-
-* [ ] SIMD optimizations
-
-* [ ] GPU acceleration
-
-* [ ] WebAssembly version
-
-* [ ] Improved UI/UX
-
 
 ---
 

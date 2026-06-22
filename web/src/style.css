@@ -1,0 +1,220 @@
+:root {
+  --bg-color: #0b0c10;
+  --panel-bg: rgba(31, 40, 51, 0.6);
+  --border-color: rgba(69, 162, 158, 0.3);
+  --text-main: #c5c6c7;
+  --text-highlight: #66fcf1;
+  --accent: #45a29e;
+  font-family: 'Outfit', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(69, 162, 158, 0.15), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(102, 252, 241, 0.1), transparent 25%);
+  overflow-x: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  #app {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.info-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-panel h1 {
+  color: var(--text-highlight);
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.info-panel p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #a0aab2;
+}
+
+.tagline {
+  display: inline-block;
+  background: rgba(102, 252, 241, 0.1);
+  color: var(--text-highlight);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--accent);
+}
+
+.interaction-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+canvas {
+  background: #000;
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  cursor: crosshair;
+  box-shadow: 0 0 20px rgba(69, 162, 158, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+canvas:hover {
+  box-shadow: 0 0 30px rgba(102, 252, 241, 0.4);
+}
+
+.canvas-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+}
+
+.canvas-guide {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  right: 15%;
+  bottom: 15%;
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  pointer-events: none; /* Allows drawing to pass through to the canvas */
+  z-index: 10;
+}
+
+.usage-hint {
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-align: center;
+  margin-top: -0.5rem;
+  font-weight: 400;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+button {
+  flex: 1;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--text-highlight);
+  color: var(--bg-color);
+  box-shadow: 0 4px 15px rgba(102, 252, 241, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 252, 241, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--text-main);
+}
+
+.btn-secondary:hover {
+  background: rgba(197, 198, 199, 0.1);
+  color: #fff;
+}
+
+.result-box {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.result-box.visible {
+  opacity: 1;
+}
+
+.prediction {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-highlight);
+}
+
+.confidence {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin-top: 0.5rem;
+}
+
+/* Loading overlay */
+#loading {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: var(--text-highlight);
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: opacity 0.5s ease;
+}

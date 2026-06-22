@@ -1,10 +1,8 @@
 use crate::draw::draw_handles;
 const DEFAULT_MODEL: &[u8] = include_bytes!(".././first.mnistai");
 
-mod dataset;
 mod draw;
 mod network;
-mod training;
 mod utils;
 
 fn main() {
@@ -13,14 +11,13 @@ fn main() {
     loop {
         let data = draw::do_drawing(&mut rl, &thread, &mut canvas);
         let g = ai.forward(data);
-        println!(" pridiction = {:?}", utils::from_one_hot(g));
+        println!(" prediction = {:?}", utils::from_one_hot(g));
     }
 }
 
 fn menu() -> network::Network {
     println!("0 : Use Default MNIST model");
-    println!("1 : Load the MNIST model");
-    println!("2 : Train the MNIST model");
+    println!("1 : Load a saved MNIST model");
 
     let mut buff = String::new();
 
@@ -48,8 +45,8 @@ fn menu() -> network::Network {
         }
 
         if paths.is_empty() {
-            println!("No saved models found. Falling back to training...");
-            return training::do_things();
+            println!("No saved models found. Using default model instead.");
+            return network::Network::load_default(DEFAULT_MODEL).unwrap();
         }
 
         // show list
@@ -81,9 +78,6 @@ fn menu() -> network::Network {
 
         println!("Loading the model... this shouldn't take too long.");
         network::Network::load(paths[index].clone()).unwrap()
-    } else if buff.trim() == "2" {
-        println!("Training the model... you might want to grab a cup of coffee while it runs.");
-        training::do_things()
     } else {
         eprintln!("Invalid option, quitting.");
         std::process::exit(1); // quit program
